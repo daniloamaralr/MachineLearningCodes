@@ -69,4 +69,19 @@ plt.ylabel('Estimated Salary')
 plt.legend()
 plt.show()
 
+# Plotting the tree
+# In the terminal enter: pip install pydot2
+from sklearn import tree
+from sklearn.externals.six import StringIO
+from IPython.display import Image
+import pydot
+dot_data = StringIO()
+tree.export_graphviz(classifier,out_file = dot_data,
+                     feature_names = ['Age', 'Estimated Salary'],
+                     class_names = ['Yes', 'No'],
+                     filled = True,
+                     rounded = True,
+                     special_characters = True)
+(graph,) = pydot.graph_from_dot_data(dot_data.getvalue())
+Image(graph.create_png())
 
